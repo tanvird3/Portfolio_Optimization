@@ -35,7 +35,7 @@ shinyServer(function(input, output) {
     # remove duplicates if it exists
     ww <- which(duplicated(ddi$Date) == TRUE)
     if (length(ww > 0)) {
-      ddi <- ddi[-ww,]
+      ddi <- ddi[-ww, ]
     }
     
     # select DATE column and only the selected insturments from the menu
@@ -52,7 +52,7 @@ shinyServer(function(input, output) {
     
     # calculate the return series
     returns <- ddi
-    R <- xts(returns[,-1], order.by = returns$DATE)
+    R <- xts(returns[, -1], order.by = returns$DATE)
     R <- Return.calculate(R)
     R[is.na(R)] <- 0
     R[!is.finite(R)] <- 0
@@ -163,7 +163,8 @@ shinyServer(function(input, output) {
         values =  ~ Weight,
         type = "pie",
         name = "Optimum Weight",
-        width = 800, height = 500
+        width = 800,
+        height = 500
       ) %>%
       layout(
         title = "",

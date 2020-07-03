@@ -13,8 +13,12 @@ shinyUI(fluidPage (
                                                                                    "SQURPHARMA")], tt[which(tt == "GP")], tt[which(tt == "DBH")]),
       multiple = T
     ),
-    textInput("startdate", label = "Start Date (yyyy-mm-dd)", value =
-                (Sys.Date() - 180)),
+    textInput(
+      "startdate",
+      label = "Start Date (yyyy-mm-dd)",
+      value =
+        (Sys.Date() - 180)
+    ),
     textInput("enddate", label = "End Date (yyyy-mm-dd)", value =
                 Sys.Date()),
     numericInput(

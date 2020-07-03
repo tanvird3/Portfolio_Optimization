@@ -22,4 +22,3 @@ reticulate::use_virtualenv("python35_env", required = TRUE)
 # read the instrument names
 inst <- data.table::fread("Inst.csv")
 tt <- inst$TRADING.CODE
-
