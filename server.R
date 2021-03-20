@@ -165,6 +165,8 @@ shinyServer(function(input, output) {
         name = "Optimum Weight",
         width = 800,
         height = 500
+        #text = ~ paste(Instrument_Name, Weight, sep = ": "), 
+        #hoverinfo = "text"
       ) %>%
       layout(
         title = "",
@@ -176,7 +178,8 @@ shinyServer(function(input, output) {
         yaxis = list(
           showgrid = FALSE,
           zeroline = FALSE,
-          showticklabels = FALSE
+          showticklabels = FALSE, 
+          hoverformat = ".2f"
         ),
         showlegend = T,
         autosize = F
@@ -199,7 +202,7 @@ shinyServer(function(input, output) {
         marker = list(color = "#56B4E9")
       ) %>%
       layout(
-        yaxis = list(title = "LOSS (in %)"),
+        yaxis = list(title = "LOSS (in %)", hoverformat = ".4f"),
         barmode = "group",
         xaxis = list(title = "Days")
       )
@@ -215,7 +218,7 @@ shinyServer(function(input, output) {
       width = 900
     ) %>%
       layout(
-        yaxis = list(title = "Gain / LOSS (in %)"),
+        yaxis = list(title = "Gain / LOSS (in %)", hoverformat = ".4f"),
         barmode = "group",
         xaxis = list(title = "Days")
       )

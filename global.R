@@ -12,13 +12,12 @@ library(ROI)
 library(ROI.plugin.glpk)
 library(ROI.plugin.quadprog)
 
-options(digits = 22)
+options(digits = 7)
 
 # load the virtual env
 reticulate::virtualenv_create("python35_env", python = "python3")
 reticulate::virtualenv_install("python35_env",
-                               packages = c("bdshare"),
-                               ignore_installed = T)
+                               packages = c("bdshare"))
 reticulate::use_virtualenv("python35_env", required = TRUE)
 
 # read the instrument names
