@@ -164,9 +164,9 @@ shinyServer(function(input, output) {
         type = "pie",
         name = "Optimum Weight",
         width = 800,
-        height = 500
-        #text = ~ paste(Instrument_Name, Weight, sep = ": "), 
-        #hoverinfo = "text"
+        height = 500,
+        #name = "",
+        hovertemplate = "%{label}: %{percent}"
       ) %>%
       layout(
         title = "",

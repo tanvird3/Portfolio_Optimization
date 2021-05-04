@@ -1,13 +1,12 @@
-library(TTR)
-library(stringr)
+# library(TTR)
+# library(stringr)
 library(plyr)
 library(dplyr)
 library(plotly)
-library(quantmod)
+#library(quantmod)
 library(PerformanceAnalytics)
 library(shinythemes)
 library(PortfolioAnalytics)
-library(quantmod)
 library(ROI)
 library(ROI.plugin.glpk)
 library(ROI.plugin.quadprog)
@@ -21,5 +20,5 @@ reticulate::virtualenv_install("python35_env",
 reticulate::use_virtualenv("python35_env", required = TRUE)
 
 # read the instrument names
-inst <- data.table::fread("Inst.csv")
+inst <- readr::read_csv("Inst.csv")
 tt <- inst$TRADING.CODE
