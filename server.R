@@ -35,7 +35,7 @@ shinyServer(function(input, output) {
     # remove duplicates if it exists
     ww <- which(duplicated(ddi$Date) == TRUE)
     if (length(ww > 0)) {
-      ddi <- ddi[-ww, ]
+      ddi <- ddi[-ww,]
     }
     
     # select DATE column and only the selected insturments from the menu
@@ -52,7 +52,7 @@ shinyServer(function(input, output) {
     
     # calculate the return series
     returns <- ddi
-    R <- xts(returns[, -1], order.by = returns$DATE)
+    R <- xts(returns[,-1], order.by = returns$DATE)
     R <- Return.calculate(R)
     R[is.na(R)] <- 0
     R[!is.finite(R)] <- 0
@@ -178,7 +178,7 @@ shinyServer(function(input, output) {
         yaxis = list(
           showgrid = FALSE,
           zeroline = FALSE,
-          showticklabels = FALSE, 
+          showticklabels = FALSE,
           hoverformat = ".2f"
         ),
         showlegend = T,
@@ -229,44 +229,64 @@ shinyServer(function(input, output) {
       ptt = ptt
     ))
   }
-  #output$X <-
-  #renderPrint({
-  #ff(input$stockX,
-  #input$startdate,
-  #input$enddate,
-  #input$optimize)$pnm
-  #})
+  
+  # get the output
+  output_get <- reactive({
+    ff(
+      input$stockX,
+      input$startdate,
+      input$enddate,
+      input$optimize,
+      input$minpct,
+      input$maxpct
+    )
+  })
+  
   output$p <-
     renderPlotly({
-      ff(
-        input$stockX,
-        input$startdate,
-        input$enddate,
-        input$optimize,
-        input$minpct,
-        input$maxpct
-      )$p
+      output_get()$p
     })
+  
   output$Y <- renderPlotly({
-    ff(
-      input$stockX,
-      input$startdate,
-      input$enddate,
-      input$optimize,
-      input$minpct,
-      input$maxpct
-    )$pt
+    output_get()$pt
   })
+  
   output$Z <- renderPlotly({
-    ff(
-      input$stockX,
-      input$startdate,
-      input$enddate,
-      input$optimize,
-      input$minpct,
-      input$maxpct
-    )$ptt
+    output_get()$ptt
   })
+  
+  
+  # output$p <-
+  #   renderPlotly({
+  #     ff(
+  #       input$stockX,
+  #       input$startdate,
+  #       input$enddate,
+  #       input$optimize,
+  #       input$minpct,
+  #       input$maxpct
+  #     )$p
+  #   })
+  # output$Y <- renderPlotly({
+  #   ff(
+  #     input$stockX,
+  #     input$startdate,
+  #     input$enddate,
+  #     input$optimize,
+  #     input$minpct,
+  #     input$maxpct
+  #   )$pt
+  # })
+  # output$Z <- renderPlotly({
+  #   ff(
+  #     input$stockX,
+  #     input$startdate,
+  #     input$enddate,
+  #     input$optimize,
+  #     input$minpct,
+  #     input$maxpct
+  #   )$ptt
+  # })
   
   lapply(c("p",
            "Y",
